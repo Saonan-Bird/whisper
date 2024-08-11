@@ -494,7 +494,7 @@ def transcribe(
                 text=tokenizer.decode(all_tokens[len(initial_prompt_tokens) :]),
                 segments=all_segments,
                 language=language,
-                progress=min(content_frames, seek) - previous_seek,
+                progress=round(seek*100/content_frames),
                 status="pending"
             )
 
@@ -502,6 +502,7 @@ def transcribe(
         text=tokenizer.decode(all_tokens[len(initial_prompt_tokens) :]),
         segments=all_segments,
         language=language,
+        progress=100,
         status="completed"
     )
 
