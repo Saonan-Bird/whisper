@@ -490,11 +490,19 @@ def transcribe(
 
             # update progress bar
             pbar.update(min(content_frames, seek) - previous_seek)
+            yield dict(
+                text=tokenizer.decode(all_tokens[len(initial_prompt_tokens) :]),
+                segments=all_segments,
+                language=language,
+                progress=min(content_frames, seek) - previous_seek,
+                status="pending"
+            )
 
-    return dict(
+    yield dict(
         text=tokenizer.decode(all_tokens[len(initial_prompt_tokens) :]),
         segments=all_segments,
         language=language,
+        status="completed"
     )
 
 
