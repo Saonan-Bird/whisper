@@ -493,6 +493,7 @@ def transcribe(
             yield dict(
                 text=tokenizer.decode(all_tokens[len(initial_prompt_tokens) :]),
                 segments=all_segments,
+                current_segments=current_segments,
                 language=language,
                 progress=round(seek*100/content_frames),
                 status="pending"
@@ -501,6 +502,7 @@ def transcribe(
     yield dict(
         text=tokenizer.decode(all_tokens[len(initial_prompt_tokens) :]),
         segments=all_segments,
+        current_segments=current_segments,
         language=language,
         progress=100,
         status="completed"
